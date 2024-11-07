@@ -1,7 +1,6 @@
 'use server'
 
 import {z} from 'zod'
-import { CreateInvoice } from '../ui/invoices/buttons';
 
 const FormSchema = z.object({
     id: z.string(),
@@ -18,13 +17,10 @@ const CreateInvoice = FormSchema.omit(
     }
 )
 
-export async function createInvoice(formData: FormData) {
-    const rawFormData = {
+export async function createInvoice(formData: FormData){
+        const {customerId, amount, status } = CreateInvoice.parse({
         customerId: formData.get('customerId'),
         amount: formData.get('amount'),
         status: formData.get('status')
-    }
-
-    console.log(rawFormData)
-    
+        });
 }
